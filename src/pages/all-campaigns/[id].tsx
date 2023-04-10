@@ -16,6 +16,7 @@ import {
   Text,
 } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
+import { IconPlayerPlay } from "@tabler/icons-react";
 import { IconInfoCircle, IconPlayerPause } from "@tabler/icons-react";
 import {
   getDownloadURL,
@@ -26,6 +27,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useMemo, useState } from "react";
+
 import { useRecoilValue } from "recoil";
 
 type CampaignIdProps = {};
@@ -42,6 +44,12 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
   const [loadingDelete, setLoadingDelete] = useState(false);
   const [token, setToken] = useState("");
   const [openDelete, setOpenDelete] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user") as string);
+    const token = user.token;
+    setToken(token);
+  }, []);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user") as string);
@@ -209,6 +217,30 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
     router.push("/all-campaigns");
   };
 
+  const playAndPause = async () => {
+    await sendRequest(
+      "PATCH",
+      "",
+      token,
+      `campaign/pause-or-play/${campaign._id}`
+    )
+      .then((res) => {
+        showNotification({
+          message: res.message,
+          autoClose: 2500,
+          color: "blue",
+        });
+        window.location.reload();
+      })
+      .catch((err) => {
+        showNotification({
+          message: err.message,
+          autoClose: 2500,
+          color: "red",
+        });
+      });
+  };
+
   return (
     <>
       <Modal
@@ -271,9 +303,12 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
               <span className="font-bold">{campaign.campaignID}</span>
             </h1>
 
-            <div className="cursor-pointer">
-              <IconPlayerPause stroke={1.5} size="1.5rem" />
-              {/* <IconPlayerPlay stroke={1.5} size="1.2rem" /> */}
+            <div className="cursor-pointer" onClick={playAndPause}>
+              {campaign.running ? (
+                <IconPlayerPause stroke={1.5} size="1.5rem" />
+              ) : (
+                <IconPlayerPlay stroke={1.5} size="1.2rem" />
+              )}
             </div>
           </div>
 

@@ -18,7 +18,7 @@ function ChartBox({ color, percentage, content }: chrtType) {
         style={{ backgroundColor: color }}
       />
       <div className="ml-3">
-        <h2 className="font-[500] text-[30px]">{percentage}%</h2>
+        <h2 className="font-[500] text-[30px]">{percentage.toFixed(2)}%</h2>
         <h2 className="text-[16px] mt-[-.5rem]">{content}</h2>
       </div>
     </div>
