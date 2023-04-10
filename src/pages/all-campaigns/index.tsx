@@ -28,11 +28,23 @@ const AllCampaigns: React.FC<AllCampaignsProps> = () => {
   campaigns?.map((campaign) => {
     const formatted_data = {
       id: campaign.campaignID,
-      email_sent: { rate: Number(campaign.email_sent), percentage: 0 },
+      email_sent: {
+        rate: Number(campaign.email_sent.rate),
+        percentage: Number(campaign.bounce_rate.percentage),
+      },
       subject: campaign.subject,
-      inbox_rate: { rate: Number(campaign.inbox_rate), percentage: 0 },
-      open_rate: { rate: Number(campaign.open_rate), percentage: 0 },
-      bounce_rate: { rate: Number(campaign.bounce_rate), percentage: 0 },
+      inbox_rate: {
+        rate: Number(campaign.inbox_rate.rate),
+        percentage: Number(campaign.bounce_rate.percentage),
+      },
+      open_rate: {
+        rate: Number(campaign.open_rate.rate),
+        percentage: Number(campaign.bounce_rate.percentage),
+      },
+      bounce_rate: {
+        rate: Number(campaign.bounce_rate.rate),
+        percentage: Number(campaign.bounce_rate.percentage),
+      },
       date: moment(campaign.createdAt).format("DD-MM-YYYY"),
     };
     data.push(formatted_data);
