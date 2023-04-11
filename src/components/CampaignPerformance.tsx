@@ -221,6 +221,7 @@ const CampaignPerformance: React.FC<CampaignPerformanceProps> = ({ data }) => {
             <Button
               leftIcon={<IconPlus size={14} />}
               className="bg-[#223be2] text-[#fff] opacity-100 hover:opacity-80 hover:bg-[#228be6] mr-5"
+              onClick={() => router.push("/create-campaign")}
             >
               Add Campaign
             </Button>

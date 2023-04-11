@@ -89,22 +89,26 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
   };
 
   const second = {
+    Sent: campaign.email_sent.percentage.toFixed(2),
     "Open Rate": campaign.open_rate.percentage.toFixed(2),
     "Inbox Rate": campaign.inbox_rate.percentage.toFixed(2),
-    "Bounce Rate": campaign.bounce_rate.percentage.toFixed(2),
+    "Bounce Rate": campaign.bounce_rate.rate.toFixed(2),
     "unsubscribe Rate": campaign.unsubscribe.percentage.toFixed(2),
+    "Click Rate": campaign.click_rate.percentage.toFixed(2),
+    "Spam Rate": campaign.spam_rate.percentage.toFixed(2),
+    "Total recipients": campaign.total_recipients.percentage.toFixed(2),
   };
 
   const formValues = {
     csv: csvFile,
     sender_name: campaign.sender_name,
     sender_email: campaign.sender_email,
-    open_rate: +campaign.open_rate,
-    bounce_rate: +campaign.bounce_rate,
-    unsubscribe: +campaign.unsubscribe,
-    email_sent: +campaign.email_sent,
+    open_rate: +campaign.open_rate.rate,
+    bounce_rate: +campaign.bounce_rate.rate,
+    unsubscribe: +campaign.unsubscribe.rate,
+    email_sent: +campaign.email_sent.rate,
     subject: campaign.subject,
-    inbox_rate: +campaign.inbox_rate,
+    inbox_rate: +campaign.inbox_rate.rate,
     country: [],
     browser_type: [],
     source_of_traffic: [],
@@ -303,7 +307,7 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
               <span className="font-bold">{campaign.campaignID}</span>
             </h1>
 
-            <div className="cursor-pointer" onClick={playAndPause}>
+            <div className="cursor-pointer no__print " onClick={playAndPause}>
               {campaign.running ? (
                 <IconPlayerPause stroke={1.5} size="1.5rem" />
               ) : (
@@ -344,7 +348,7 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
                   <h2 className="font-[500]">{key}</h2>
                   <IconInfoCircle stroke={1.5} size="1.1rem" />
                 </div>
-                <h2 className="font-bold text-[30px] mt-4 text-[#10b981]">
+                <h2 className="font-bold text-[20px] mt-3 text-[#10b981]">
                   {value}%
                 </h2>
               </aside>
@@ -376,7 +380,7 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
 
         <SimpleGrid
           cols={1}
-          className="items-center mt-10 w-[100%] px-8"
+          className="items-center mt-10 w-[100%] px-8 no__print"
           spacing="lg"
           breakpoints={[{ minWidth: 980, cols: 2, spacing: "md" }]}
         >
@@ -396,7 +400,7 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
             </p>
 
             <Link
-              className="bg-[#1c7ed6] p-2 rounded text-[#fff] hover:opacity-70"
+              className="bg-[#1c7ed6] p-2 rounded text-[#fff] hover:opacity-70 no__print"
               title="Download CSV file"
               href={campaign.uploaded_csv}
               onClick={(e) => {
@@ -416,7 +420,7 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
 
           <Button
             color="red"
-            className="w-[5.5rem]"
+            className="w-[5.5rem] no__print"
             variant="outline"
             title="Delete campaign"
             onClick={deleteCampaignRequest}
