@@ -1,5 +1,4 @@
 import { Campaign, campaignState } from "@/atoms/campaignAtom";
-import CountryChart from "@/components/CountryChart";
 import CreateCampaign, { CampaignValues } from "@/components/CreateCampaign";
 import OtherChart from "@/components/OtherChart";
 import Spinner from "@/components/Spinner";
@@ -348,7 +347,7 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
                   <h2 className="font-[500]">{key}</h2>
                   <IconInfoCircle stroke={1.5} size="1.1rem" />
                 </div>
-                <h2 className="font-bold text-[20px] mt-3 text-[#10b981]">
+                <h2 className="font-bold text-[20px] mt-3 text-[#000]">
                   {value}%
                 </h2>
               </aside>
@@ -377,19 +376,6 @@ const CampaignId: React.FC<CampaignIdProps> = () => {
             ))}
           </article>
         </div>
-
-        <SimpleGrid
-          cols={1}
-          className="items-center mt-10 w-[100%] px-8 no__print"
-          spacing="lg"
-          breakpoints={[{ minWidth: 980, cols: 2, spacing: "md" }]}
-        >
-          <CountryChart
-            chartData={campaign.countries_percentage}
-            header="Country"
-          />
-          <OtherChart chartData={campaign.countries_percentage} />
-        </SimpleGrid>
         <div className="my-6 flex justify-between">
           <div className="flex gap-4 items-center">
             <p>
