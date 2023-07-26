@@ -17,7 +17,7 @@ const useCampaign = () => {
   const getCampaigns = useCallback(async () => {
     if (token === "") return;
     try {
-      const res = await fetch("https://inbox-peak.cyclic.app/campaign", {
+      const res = await fetch("https://inbox-peak.onrender.com/campaign", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +38,7 @@ const useCampaign = () => {
       if (token === "") return;
       try {
         const res = await fetch(
-          `https://inbox-peak.cyclic.app/campaign/${id}`,
+          `https://inbox-peak.onrender.com/campaign/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
