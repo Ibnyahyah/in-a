@@ -1,7 +1,7 @@
 const config = async (email: string, password: string) => {
   const payload = { email, password };
   try {
-    const response = await fetch(`https://inbox-peak.cyclic.app/user/login`, {
+    const response = await fetch(`https://inbox-peak.onrender.com/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
